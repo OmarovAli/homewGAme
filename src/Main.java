@@ -39,17 +39,16 @@ public class Main {
 
         saveGame(savegamesPath + "save3.dat", game3);
 
-        zipFiles(zipPath + "save.zip", savegamesPath);
-        delete(savegamesPath + "save1.dat");
+            delete(savegamesPath + "save1.dat");
 
-        delete(savegamesPath + "save2.dat");
+            delete(savegamesPath + "save2.dat");
 
-        delete(savegamesPath + "save3.dat");
+            delete(savegamesPath + "save3.dat");
     }
 
     public static void createDir(String dirPath) {
         File dir = new File(dirPath);
-        String text = "Папка создана";
+        String text = "Папка " + dir + " создана";
         // sb.append(text);
         if (dir.mkdir()) {
             sb.append(text + '\n');
@@ -58,7 +57,7 @@ public class Main {
 
     public static void createFile(String dirPath, String fileName) {
         File file = new File(dirPath, fileName);
-        String text = "Файл создан";
+        String text = "Файл " + file + " создан";
         //sb.append(text);
         try {
             if (file.createNewFile())
