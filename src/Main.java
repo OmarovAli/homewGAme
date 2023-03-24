@@ -34,22 +34,21 @@ public class Main {
         GameProgress game2 = new GameProgress(7, 7, 7, 7);
         GameProgress game3 = new GameProgress(5, 5, 5, 5);
 
-        saveGame(savegamesPath + "save1.dat", game1);
-        saveGame(savegamesPath + "save2.dat", game2);
+            saveGame(savegamesPath + "save1.dat", game1);
+            saveGame(savegamesPath + "save2.dat", game2);
+            saveGame(savegamesPath + "save3.dat", game3);
 
-        saveGame(savegamesPath + "save3.dat", game3);
+            zipFiles(zipPath + "save.zip");
 
+            delete(zipPath + "save.zip/save.zip");
             delete(savegamesPath + "save1.dat");
-
             delete(savegamesPath + "save2.dat");
-
             delete(savegamesPath + "save3.dat");
     }
 
     public static void createDir(String dirPath) {
         File dir = new File(dirPath);
         String text = "Папка " + dir + " создана";
-        // sb.append(text);
         if (dir.mkdir()) {
             sb.append(text + '\n');
         }
@@ -58,7 +57,6 @@ public class Main {
     public static void createFile(String dirPath, String fileName) {
         File file = new File(dirPath, fileName);
         String text = "Файл " + file + " создан";
-        //sb.append(text);
         try {
             if (file.createNewFile())
                 sb.append(text + '\n');
@@ -76,14 +74,13 @@ public class Main {
         }
     }
 
-    public static void zipFiles(String zipPath, String savegamesPath) {
+    public static void zipFiles(String zipPath) {
         try (FileOutputStream fos = new FileOutputStream(zipPath); ZipOutputStream zos = new ZipOutputStream(fos)) {
             File dir = new File(savegamesPath);
             for (File item : dir.listFiles()) {
                 FileInputStream fis = new FileInputStream(savegamesPath + item.getName());
                 ZipEntry entry = new ZipEntry(item.getName());
                 zos.putNextEntry(entry);
-                dir.delete();
                 byte[] buffer = new byte[fis.available()];
                 fis.read(buffer);
                 zos.write(buffer);
